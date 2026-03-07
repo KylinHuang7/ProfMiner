@@ -25,7 +25,7 @@ public class RubyHeartItem extends Item {
     private static final double MAX_HEALTH_LIMIT = 40.0;
     // 属性修改器的基础ID
     private static final ResourceLocation RUBY_HEART_MODIFIER_ID =
-            ResourceLocation.fromNamespaceAndPath(Firstmod.MODID, "ruby_heart_extra_health");
+            ResourceLocation.fromNamespaceAndPath(ProfMiner.MODID, "ruby_heart_extra_health");
 
     public RubyHeartItem(Properties properties) {
         super(properties);
