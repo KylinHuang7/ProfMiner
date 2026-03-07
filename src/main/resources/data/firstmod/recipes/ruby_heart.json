@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "RRR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "firstmod:ruby"
+    }
+  },
+  "result": {
+    "id": "firstmod:ruby_heart",
+    "count": 1
+  }
+}

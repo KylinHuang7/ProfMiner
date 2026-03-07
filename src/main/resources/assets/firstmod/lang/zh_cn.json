@@ -4,5 +4,8 @@
   "item.firstmod.example_item": "示例物品",
   "block.firstmod.ruby_ore": "红宝石矿石",
   "block.firstmod.deepslate_ruby_ore": "深板岩红宝石矿石",
-  "item.firstmod.ruby": "红宝石"
+  "item.firstmod.ruby": "红宝石",
+  "item.firstmod.ruby_heart": "红宝石心",
+  "item.firstmod.ruby_heart.max_reached": "你的生命值已经达到上限了！",
+  "item.firstmod.ruby_heart.success": "生命值上限已增加至%s颗红心！"
 }
