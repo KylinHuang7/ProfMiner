@@ -3,11 +3,6 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -31,7 +26,7 @@
                   }
                 }
               ],
-              "name": "firstmod:ruby_ore"
+              "name": "firstmod:deepslate_ruby_ore"
             },
             {
               "type": "minecraft:item",
@@ -39,7 +34,7 @@
                 {
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:ore_drops",
-                  "function": "minecraft:apply_bonus_count"
+                  "function": "minecraft:apply_bonus"
                 },
                 {
                   "function": "minecraft:explosion_decay"
@@ -53,5 +48,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "firstmod:blocks/ruby_ore"
+  "random_sequence": "firstmod:blocks/deepslate_ruby_ore"
 }
