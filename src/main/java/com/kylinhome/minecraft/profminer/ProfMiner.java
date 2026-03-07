@@ -13,8 +13,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.neoforged.api.distmarker.Dist;
@@ -84,6 +89,81 @@ public class ProfMiner {
     public static final DeferredItem<Item> RUBY_HEART = ITEMS.registerItem("ruby_heart",
       RubyHeartItem::new, new Item.Properties().stacksTo(16));
 
+    // ========== 蛋白石系列 ==========
+    // 蛋白石矿石方块（石头中生成，石镐可挖掘，不掉落经验）
+    public static final DeferredBlock<Block> OPAL_ORE = BLOCKS.register("opal_ore",
+      () -> new Block(
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.STONE)
+          .strength(3.0f, 3.0f)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    // 蛋白石矿石方块物品
+    public static final DeferredItem<BlockItem> OPAL_ORE_ITEM = ITEMS.registerSimpleBlockItem("opal_ore", OPAL_ORE);
+    // 蛋白石物品
+    public static final DeferredItem<Item> OPAL = ITEMS.registerSimpleItem("opal", new Item.Properties());
+    // 蛋白石块
+    public static final DeferredBlock<Block> OPAL_BLOCK = BLOCKS.registerSimpleBlock("opal_block",
+      BlockBehaviour.Properties.of()
+        .mapColor(MapColor.QUARTZ)
+        .strength(1.5f, 6.0f)
+        .requiresCorrectToolForDrops()
+        .sound(SoundType.STONE));
+    public static final DeferredItem<BlockItem> OPAL_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("opal_block", OPAL_BLOCK);
+    // 平滑蛋白石块（熔炉烧制获得）
+    public static final DeferredBlock<Block> SMOOTH_OPAL_BLOCK = BLOCKS.registerSimpleBlock("smooth_opal_block",
+      BlockBehaviour.Properties.of()
+        .mapColor(MapColor.QUARTZ)
+        .strength(2.0f, 6.0f)
+        .requiresCorrectToolForDrops()
+        .sound(SoundType.STONE));
+    public static final DeferredItem<BlockItem> SMOOTH_OPAL_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("smooth_opal_block", SMOOTH_OPAL_BLOCK);
+    // 蛋白石砖
+    public static final DeferredBlock<Block> OPAL_BRICKS = BLOCKS.registerSimpleBlock("opal_bricks",
+      BlockBehaviour.Properties.of()
+        .mapColor(MapColor.QUARTZ)
+        .strength(2.0f, 6.0f)
+        .requiresCorrectToolForDrops()
+        .sound(SoundType.STONE));
+    public static final DeferredItem<BlockItem> OPAL_BRICKS_ITEM = ITEMS.registerSimpleBlockItem("opal_bricks", OPAL_BRICKS);
+    // 蛋白石楼梯
+    public static final DeferredBlock<StairBlock> OPAL_STAIRS = BLOCKS.register("opal_stairs",
+      () -> new StairBlock(OPAL_BLOCK.get().defaultBlockState(),
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.QUARTZ)
+          .strength(1.5f, 6.0f)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    public static final DeferredItem<BlockItem> OPAL_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("opal_stairs", OPAL_STAIRS);
+    // 蛋白石台阶
+    public static final DeferredBlock<SlabBlock> OPAL_SLAB = BLOCKS.register("opal_slab",
+      () -> new SlabBlock(
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.QUARTZ)
+          .strength(1.5f, 6.0f)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    public static final DeferredItem<BlockItem> OPAL_SLAB_ITEM = ITEMS.registerSimpleBlockItem("opal_slab", OPAL_SLAB);
+    // 蛋白石压力板
+    public static final DeferredBlock<PressurePlateBlock> OPAL_PRESSURE_PLATE = BLOCKS.register("opal_pressure_plate",
+      () -> new PressurePlateBlock(BlockSetType.STONE,
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.QUARTZ)
+          .strength(0.5f)
+          .requiresCorrectToolForDrops()
+          .noCollission()
+          .sound(SoundType.STONE)));
+    public static final DeferredItem<BlockItem> OPAL_PRESSURE_PLATE_ITEM = ITEMS.registerSimpleBlockItem("opal_pressure_plate", OPAL_PRESSURE_PLATE);
+    // 蛋白石围墙
+    public static final DeferredBlock<WallBlock> OPAL_WALL = BLOCKS.register("opal_wall",
+      () -> new WallBlock(
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.QUARTZ)
+          .strength(1.5f, 6.0f)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    public static final DeferredItem<BlockItem> OPAL_WALL_ITEM = ITEMS.registerSimpleBlockItem("opal_wall", OPAL_WALL);
+
     // Creates a new food item with the id "profminer:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item",
       new Item.Properties().food(
@@ -100,6 +180,15 @@ public class ProfMiner {
             output.accept(RUBY_HEART.get());
             output.accept(RUBY_ORE_ITEM.get());
             output.accept(DEEPSLATE_RUBY_ORE_ITEM.get());
+            output.accept(OPAL.get());
+            output.accept(OPAL_ORE_ITEM.get());
+            output.accept(OPAL_BLOCK_ITEM.get());
+            output.accept(SMOOTH_OPAL_BLOCK_ITEM.get());
+            output.accept(OPAL_BRICKS_ITEM.get());
+            output.accept(OPAL_STAIRS_ITEM.get());
+            output.accept(OPAL_SLAB_ITEM.get());
+            output.accept(OPAL_PRESSURE_PLATE_ITEM.get());
+            output.accept(OPAL_WALL_ITEM.get());
         }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -146,10 +235,19 @@ public class ProfMiner {
             event.accept(EXAMPLE_BLOCK_ITEM);
             event.accept(RUBY_ORE_ITEM);
             event.accept(DEEPSLATE_RUBY_ORE_ITEM);
+            event.accept(OPAL_ORE_ITEM);
+            event.accept(OPAL_BLOCK_ITEM);
+            event.accept(SMOOTH_OPAL_BLOCK_ITEM);
+            event.accept(OPAL_BRICKS_ITEM);
+            event.accept(OPAL_STAIRS_ITEM);
+            event.accept(OPAL_SLAB_ITEM);
+            event.accept(OPAL_PRESSURE_PLATE_ITEM);
+            event.accept(OPAL_WALL_ITEM);
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(RUBY);
             event.accept(RUBY_HEART);
+            event.accept(OPAL);
         }
     }
 

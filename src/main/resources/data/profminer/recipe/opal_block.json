@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OO",
+    "OO"
+  ],
+  "key": {
+    "O": {
+      "item": "profminer:opal"
+    }
+  },
+  "result": {
+    "id": "profminer:opal_block",
+    "count": 1
+  }
+}

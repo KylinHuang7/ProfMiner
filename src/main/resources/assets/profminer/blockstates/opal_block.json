@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "profminer:block/opal_block"
+    }
+  }
+}

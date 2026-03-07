@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "profminer:block/opal_slab" },
+    "type=double": { "model": "profminer:block/opal_block" },
+    "type=top":    { "model": "profminer:block/opal_slab_top" }
+  }
+}

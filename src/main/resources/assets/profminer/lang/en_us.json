@@ -7,5 +7,14 @@
   "item.profminer.ruby": "Ruby",
   "item.profminer.ruby_heart": "Ruby Heart",
   "item.profminer.ruby_heart.max_reached": "Your health is already at the maximum!",
-  "item.profminer.ruby_heart.success": "Health increased to %s hearts!"
+  "item.profminer.ruby_heart.success": "Health increased to %s hearts!",
+  "block.profminer.opal_ore": "Opal Ore",
+  "item.profminer.opal": "Opal",
+  "block.profminer.opal_block": "Opal Block",
+  "block.profminer.smooth_opal_block": "Smooth Opal Block",
+  "block.profminer.opal_bricks": "Opal Bricks",
+  "block.profminer.opal_stairs": "Opal Stairs",
+  "block.profminer.opal_slab": "Opal Slab",
+  "block.profminer.opal_pressure_plate": "Opal Pressure Plate",
+  "block.profminer.opal_wall": "Opal Wall"
 }

@@ -2,6 +2,14 @@
   "replace": false,
   "values": [
     "profminer:ruby_ore",
-    "profminer:deepslate_ruby_ore"
+    "profminer:deepslate_ruby_ore",
+    "profminer:opal_ore",
+    "profminer:opal_block",
+    "profminer:smooth_opal_block",
+    "profminer:opal_bricks",
+    "profminer:opal_stairs",
+    "profminer:opal_slab",
+    "profminer:opal_pressure_plate",
+    "profminer:opal_wall"
   ]
 }
