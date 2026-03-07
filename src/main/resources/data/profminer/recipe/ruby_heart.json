@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "RRR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "profminer:ruby"
+    }
+  },
+  "result": {
+    "id": "profminer:ruby_heart",
+    "count": 1
+  }
+}

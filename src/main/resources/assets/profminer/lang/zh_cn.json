@@ -1,0 +1,11 @@
+{
+  "itemGroup.profminer": "示例模组标签页",
+  "block.profminer.example_block": "示例方块",
+  "item.profminer.example_item": "示例物品",
+  "block.profminer.ruby_ore": "红宝石矿石",
+  "block.profminer.deepslate_ruby_ore": "深板岩红宝石矿石",
+  "item.profminer.ruby": "红宝石",
+  "item.profminer.ruby_heart": "红宝石心",
+  "item.profminer.ruby_heart.max_reached": "你的生命值已经达到上限了！",
+  "item.profminer.ruby_heart.success": "生命值上限已增加至%s颗红心！"
+}

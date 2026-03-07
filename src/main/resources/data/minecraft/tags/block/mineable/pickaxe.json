@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "firstmod:ruby_ore",
-    "firstmod:deepslate_ruby_ore"
+    "profminer:ruby_ore",
+    "profminer:deepslate_ruby_ore"
   ]
 }

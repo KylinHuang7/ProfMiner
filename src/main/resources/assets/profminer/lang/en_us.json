@@ -1,0 +1,11 @@
+{
+  "itemGroup.profminer": "Example Mod Tab",
+  "block.profminer.example_block": "Example Block",
+  "item.profminer.example_item": "Example Item",
+  "block.profminer.ruby_ore": "Ruby Ore",
+  "block.profminer.deepslate_ruby_ore": "Deepslate Ruby Ore",
+  "item.profminer.ruby": "Ruby",
+  "item.profminer.ruby_heart": "Ruby Heart",
+  "item.profminer.ruby_heart.max_reached": "Your health is already at the maximum!",
+  "item.profminer.ruby_heart.success": "Health increased to %s hearts!"
+}
