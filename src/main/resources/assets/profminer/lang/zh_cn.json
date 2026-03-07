@@ -7,5 +7,14 @@
   "item.profminer.ruby": "红宝石",
   "item.profminer.ruby_heart": "红宝石心",
   "item.profminer.ruby_heart.max_reached": "你的生命值已经达到上限了！",
-  "item.profminer.ruby_heart.success": "生命值上限已增加至%s颗红心！"
+  "item.profminer.ruby_heart.success": "生命值上限已增加至%s颗红心！",
+  "block.profminer.opal_ore": "蛋白石矿石",
+  "item.profminer.opal": "蛋白石",
+  "block.profminer.opal_block": "蛋白石块",
+  "block.profminer.smooth_opal_block": "平滑蛋白石块",
+  "block.profminer.opal_bricks": "蛋白石砖",
+  "block.profminer.opal_stairs": "蛋白石楼梯",
+  "block.profminer.opal_slab": "蛋白石台阶",
+  "block.profminer.opal_pressure_plate": "蛋白石压力板",
+  "block.profminer.opal_wall": "蛋白石围墙"
 }
