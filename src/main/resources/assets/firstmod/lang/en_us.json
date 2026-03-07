@@ -1,5 +1,8 @@
 {
   "itemGroup.firstmod": "Example Mod Tab",
   "block.firstmod.example_block": "Example Block",
-  "item.firstmod.example_item": "Example Item"
+  "item.firstmod.example_item": "Example Item",
+  "block.firstmod.ruby_ore": "Ruby Ore",
+  "block.firstmod.deepslate_ruby_ore": "Deepslate Ruby Ore",
+  "item.firstmod.ruby": "Ruby"
 }

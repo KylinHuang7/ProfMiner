@@ -17,8 +17,11 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -63,6 +66,29 @@ public class Firstmod {
     public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block",
       EXAMPLE_BLOCK);
 
+    // ========== 红宝石矿石 ==========
+    // 红宝石矿石方块（石头变种）
+    public static final DeferredBlock<Block> RUBY_ORE = BLOCKS.register("ruby_ore",
+      () -> new DropExperienceBlock(UniformInt.of(3, 7),
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.STONE)
+          .strength(3.0f, 3.0f) // 硬度和爆炸抗性，与钻石矿相同
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    // 深板岩红宝石矿石方块
+    public static final DeferredBlock<Block> DEEPSLATE_RUBY_ORE = BLOCKS.register("deepslate_ruby_ore",
+      () -> new DropExperienceBlock(UniformInt.of(3, 7),
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.DEEPSLATE)
+          .strength(4.5f, 3.0f) // 深板岩变种更硬
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.DEEPSLATE)));
+    // 红宝石矿石方块物品
+    public static final DeferredItem<BlockItem> RUBY_ORE_ITEM = ITEMS.registerSimpleBlockItem("ruby_ore", RUBY_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_RUBY_ORE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_ruby_ore", DEEPSLATE_RUBY_ORE);
+    // 红宝石物品
+    public static final DeferredItem<Item> RUBY = ITEMS.registerSimpleItem("ruby", new Item.Properties());
+
     // Creates a new food item with the id "firstmod:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item",
       new Item.Properties().food(
@@ -75,6 +101,9 @@ public class Firstmod {
         .displayItems((parameters, output) -> {
             output.accept(
               EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+            output.accept(RUBY.get());
+            output.accept(RUBY_ORE_ITEM.get());
+            output.accept(DEEPSLATE_RUBY_ORE_ITEM.get());
         }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -119,6 +148,11 @@ public class Firstmod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(EXAMPLE_BLOCK_ITEM);
+            event.accept(RUBY_ORE_ITEM);
+            event.accept(DEEPSLATE_RUBY_ORE_ITEM);
+        }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(RUBY);
         }
     }
 
