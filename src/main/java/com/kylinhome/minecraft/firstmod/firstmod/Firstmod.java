@@ -5,6 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -25,6 +30,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -40,6 +46,8 @@ public class Firstmod {
     public static final String MODID = "firstmod";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+    // 用于标识我们的生命值修改器的唯一ID
+    private static final ResourceLocation HEALTH_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(MODID, "extra_health");
     // Create a Deferred Register to hold Blocks which will all be registered under the "firstmod" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "firstmod" namespace
@@ -119,6 +127,30 @@ public class Firstmod {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    // 当玩家加入世界时，增加生命值上限到12颗红心（24点生命值，即额外+4点）
+    @SubscribeEvent
+    public void onPlayerJoinWorld(EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            // 只在服务端处理，避免重复
+            if (!player.level().isClientSide()) {
+                AttributeInstance healthAttribute = player.getAttribute(Attributes.MAX_HEALTH);
+                if (healthAttribute != null) {
+                    // 如果还没有添加过修改器，则添加
+                    if (healthAttribute.getModifier(HEALTH_MODIFIER_ID) == null) {
+                        // 增加4点生命值（2颗红心），总共12颗红心
+                        AttributeModifier modifier = new AttributeModifier(
+                                HEALTH_MODIFIER_ID,
+                                4.0, // 额外增加4点生命值
+                                AttributeModifier.Operation.ADD_VALUE
+                        );
+                        healthAttribute.addPermanentModifier(modifier);
+                        LOGGER.info("已为玩家 {} 增加生命值上限至12颗红心", player.getName().getString());
+                    }
+                }
+            }
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
