@@ -1,7 +1,5 @@
 {
-  "itemGroup.profminer": "示例模组标签页",
-  "block.profminer.example_block": "示例方块",
-  "item.profminer.example_item": "示例物品",
+  "itemGroup.profminer": "Professional Miner",
   "block.profminer.ruby_ore": "红宝石矿石",
   "block.profminer.deepslate_ruby_ore": "深板岩红宝石矿石",
   "item.profminer.ruby": "红宝石",
@@ -16,5 +14,21 @@
   "block.profminer.opal_stairs": "蛋白石楼梯",
   "block.profminer.opal_slab": "蛋白石台阶",
   "block.profminer.opal_pressure_plate": "蛋白石压力板",
-  "block.profminer.opal_wall": "蛋白石围墙"
+  "block.profminer.opal_wall": "蛋白石围墙",
+  "block.profminer.titanium_ore": "钛矿",
+  "item.profminer.raw_titanium": "钛矿石",
+  "item.profminer.titanium": "钛",
+  "item.profminer.titanium_alloy_ingot": "钛合金锭",
+  "block.profminer.titanium_alloy_block": "钛合金块",
+  "item.profminer.nether_titanium_alloy_ingot": "下界钛合金锭",
+  "block.profminer.nether_titanium_alloy_block": "下界钛合金块",
+  "item.profminer.titanium_alloy_helmet": "钛合金头盔",
+  "item.profminer.titanium_alloy_chestplate": "钛合金胸甲",
+  "item.profminer.titanium_alloy_leggings": "钛合金护腿",
+  "item.profminer.titanium_alloy_boots": "钛合金靴子",
+  "item.profminer.nether_titanium_alloy_helmet": "下界钛合金头盔",
+  "item.profminer.nether_titanium_alloy_chestplate": "下界钛合金胸甲",
+  "item.profminer.nether_titanium_alloy_leggings": "下界钛合金护腿",
+  "item.profminer.nether_titanium_alloy_boots": "下界钛合金靴子",
+  "item.profminer.alloy_smithing_template": "合金锻造模板"
 }

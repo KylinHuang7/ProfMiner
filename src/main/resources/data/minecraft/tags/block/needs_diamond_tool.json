@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "profminer:titanium_ore",
+    "profminer:titanium_alloy_block",
+    "profminer:nether_titanium_alloy_block"
+  ]
+}

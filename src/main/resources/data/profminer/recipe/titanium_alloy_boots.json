@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T T",
+    "T T"
+  ],
+  "key": {
+    "T": {
+      "item": "profminer:titanium_alloy_ingot"
+    }
+  },
+  "result": {
+    "id": "profminer:titanium_alloy_boots",
+    "count": 1
+  }
+}

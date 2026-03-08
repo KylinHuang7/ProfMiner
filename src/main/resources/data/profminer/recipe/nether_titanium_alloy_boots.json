@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "profminer:alloy_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:diamond_boots"
+  },
+  "addition": {
+    "item": "profminer:nether_titanium_alloy_ingot"
+  },
+  "result": {
+    "id": "profminer:nether_titanium_alloy_boots",
+    "count": 1
+  }
+}
