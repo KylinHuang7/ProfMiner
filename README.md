@@ -42,10 +42,10 @@
 
 ## 🔧 技术信息
 
-| 属性 | 值                       |
-|---|-------------------------|
-| 模组 ID | `profminer`             |
-| 模组名称 | Professional Miner      |
-| Minecraft 版本 | 1.21.1                  |
-| 模组加载器 | NeoForge 21.1.219       |
-| 作者 | KylinHuang & OscarHuang |
+| 属性 | 值                         |
+|---|---------------------------|
+| 模组 ID | `profminer`               |
+| 模组名称 | Professional Miner        |
+| Minecraft 版本 | 1.21.1                    |
+| 模组加载器 | NeoForge 21.1.219         |
+| 作者 | KylinHuang & dragonhahaha |
