@@ -1,6 +1,7 @@
 # Professional Miner
 
-一个为 Minecraft 1.21.1 (NeoForge) 打造的模组，新增了**红宝石**和**蛋白石**两大系列的矿物与装饰方块。
+一个专注于各种矿物的模组。
+支持MineCraft 1.21.1
 
 ---
 
@@ -41,10 +42,10 @@
 
 ## 🔧 技术信息
 
-| 属性 | 值 |
-|---|---|
-| 模组 ID | `profminer` |
-| 模组名称 | Professional Miner |
-| Minecraft 版本 | 1.21.1 |
-| 模组加载器 | NeoForge 21.1.219 |
-| 作者 | KylinHuang |
+| 属性 | 值                       |
+|---|-------------------------|
+| 模组 ID | `profminer`             |
+| 模组名称 | Professional Miner      |
+| Minecraft 版本 | 1.21.1                  |
+| 模组加载器 | NeoForge 21.1.219       |
+| 作者 | KylinHuang & OscarHuang |
