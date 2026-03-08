@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "profminer:raw_titanium"
+  },
+  "result": {
+    "id": "profminer:titanium",
+    "count": 1
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

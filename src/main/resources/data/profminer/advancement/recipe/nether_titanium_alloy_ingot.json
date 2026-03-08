@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alloy_smithing_template": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "profminer:alloy_smithing_template" }]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": { "recipe": "profminer:nether_titanium_alloy_ingot" }
+    }
+  },
+  "requirements": [["has_alloy_smithing_template", "has_the_recipe"]],
+  "rewards": { "recipes": ["profminer:nether_titanium_alloy_ingot"] }
+}

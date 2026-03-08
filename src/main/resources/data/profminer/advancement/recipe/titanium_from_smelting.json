@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_titanium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "profminer:raw_titanium" }]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": { "recipe": "profminer:titanium_from_smelting" }
+    }
+  },
+  "requirements": [["has_raw_titanium", "has_the_recipe"]],
+  "rewards": { "recipes": ["profminer:titanium_from_smelting", "profminer:titanium_from_blasting"] }
+}

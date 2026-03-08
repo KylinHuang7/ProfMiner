@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_nether_titanium_alloy_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "profminer:nether_titanium_alloy_ingot" }]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": { "recipe": "profminer:nether_titanium_alloy_block" }
+    }
+  },
+  "requirements": [["has_nether_titanium_alloy_ingot", "has_the_recipe"]],
+  "rewards": { "recipes": ["profminer:nether_titanium_alloy_block", "profminer:nether_titanium_alloy_helmet", "profminer:nether_titanium_alloy_chestplate", "profminer:nether_titanium_alloy_leggings", "profminer:nether_titanium_alloy_boots"] }
+}

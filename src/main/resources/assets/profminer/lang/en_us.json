@@ -1,7 +1,5 @@
 {
-  "itemGroup.profminer": "Example Mod Tab",
-  "block.profminer.example_block": "Example Block",
-  "item.profminer.example_item": "Example Item",
+  "itemGroup.profminer": "Professional Miner",
   "block.profminer.ruby_ore": "Ruby Ore",
   "block.profminer.deepslate_ruby_ore": "Deepslate Ruby Ore",
   "item.profminer.ruby": "Ruby",
@@ -16,5 +14,21 @@
   "block.profminer.opal_stairs": "Opal Stairs",
   "block.profminer.opal_slab": "Opal Slab",
   "block.profminer.opal_pressure_plate": "Opal Pressure Plate",
-  "block.profminer.opal_wall": "Opal Wall"
+  "block.profminer.opal_wall": "Opal Wall",
+  "block.profminer.titanium_ore": "Titanium Ore",
+  "item.profminer.raw_titanium": "Raw Titanium",
+  "item.profminer.titanium": "Titanium",
+  "item.profminer.titanium_alloy_ingot": "Titanium Alloy Ingot",
+  "block.profminer.titanium_alloy_block": "Titanium Alloy Block",
+  "item.profminer.nether_titanium_alloy_ingot": "Nether Titanium Alloy Ingot",
+  "block.profminer.nether_titanium_alloy_block": "Nether Titanium Alloy Block",
+  "item.profminer.titanium_alloy_helmet": "Titanium Alloy Helmet",
+  "item.profminer.titanium_alloy_chestplate": "Titanium Alloy Chestplate",
+  "item.profminer.titanium_alloy_leggings": "Titanium Alloy Leggings",
+  "item.profminer.titanium_alloy_boots": "Titanium Alloy Boots",
+  "item.profminer.nether_titanium_alloy_helmet": "Nether Titanium Alloy Helmet",
+  "item.profminer.nether_titanium_alloy_chestplate": "Nether Titanium Alloy Chestplate",
+  "item.profminer.nether_titanium_alloy_leggings": "Nether Titanium Alloy Leggings",
+  "item.profminer.nether_titanium_alloy_boots": "Nether Titanium Alloy Boots",
+  "item.profminer.alloy_smithing_template": "Alloy Smithing Template"
 }

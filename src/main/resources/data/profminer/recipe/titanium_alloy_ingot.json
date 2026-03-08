@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "profminer:alloy_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:iron_ingot"
+  },
+  "addition": {
+    "item": "profminer:titanium"
+  },
+  "result": {
+    "id": "profminer:titanium_alloy_ingot",
+    "count": 1
+  }
+}
