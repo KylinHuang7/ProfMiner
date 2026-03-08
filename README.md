@@ -1,5 +1,7 @@
 # Professional Miner
 
+[🌐 English Version](README_EN.md)
+
 一个专注于各种矿物的模组。
 支持MineCraft 1.21.1
 
