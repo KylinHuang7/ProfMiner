@@ -6,6 +6,8 @@
 
 ## 钛矿（Titanium Ore）
 
+![钛矿](../screenshots/titanium/titanium_ore.png)
+
 - **生成范围**：Y = -50 ~ -15，均匀分布
 - **矿脉大小**：每个矿脉最多 8 个方块，每区块 2 次
 - **挖掘要求**：钻石镐及以上
@@ -21,6 +23,8 @@
 
 ## 钛矿石（Raw Titanium）
 
+![钛矿石](../screenshots/titanium/titanium.png)
+
 - 钛矿/深层钛矿的掉落物
 - 可在熔炉或高炉中熔炼获得钛
 
@@ -33,11 +37,15 @@
 
 ## 钛（Titanium）
 
+![钛](../screenshots/titanium/titanium_bricks.png)
+
 - 由钛矿石熔炼获得，是制作钛合金锭和下界钛合金锭的关键材料
 
 ---
 
 ## 合金锻造模板（Alloy Smithing Template）
+
+![合金锻造模板](../screenshots/titanium/alloy_smithing_template.png)
 
 - 在锻造台中使用，用于合成钛合金锭、下界钛合金锭及下界钛合金装备
 
@@ -47,6 +55,8 @@
 
 - **合成方式**：锻造台 — 合金锻造模板 + 铁锭 + 钛
 
+![钛合金锭](../screenshots/titanium/titanium_alloy_ingot.png)
+
 ---
 
 ## 钛合金块（Titanium Alloy Block）
@@ -55,11 +65,17 @@
 - **硬度**：50.0，爆炸抗性 1200.0（与下界合金块相同）
 - **挖掘要求**：钻石镐及以上
 
+![钛合金块](../screenshots/titanium/titanium_alloy_ingot_1.png)
+
 ---
 
 ## 钛合金装备
 
 使用钛合金锭按标准装备配方在工作台合成。
+
+![钛合金装备](../screenshots/titanium/titanium_alloy_ingot_2.png)
+
+![钛合金装备](../screenshots/titanium/titanium_alloy_ingot_3.png)
 
 | 装备 | 防护值 | 耐久 | 韧性 | 击退抗性 |
 |---|---|---|---|---|
@@ -70,6 +86,10 @@
 
 - **附魔值**：15
 - **修复材料**：钛合金锭
+
+![钛合金装备](../screenshots/titanium/titanium_alloy_1.png)
+
+![钛合金装备](../screenshots/titanium/titanium_alloy_2.png)
 
 ---
 
@@ -85,11 +105,15 @@
 - **硬度**：50.0，爆炸抗性 1200.0（与黑曜石相同）
 - **挖掘要求**：钻石镐及以上
 
+![下界钛合金块](../screenshots/titanium/nether_titanium_alloy_ingot_1.png)
+
 ---
 
 ## 下界钛合金装备
 
 在锻造台中使用合金锻造模板 + 钻石装备 + 下界钛合金锭合成。
+
+![下界钛合金装备](../screenshots/titanium/nether_titanium_alloy_ingot_2.png)
 
 | 装备 | 防护值 | 耐久 | 韧性 | 击退抗性 |
 |---|---|---|---|---|
@@ -101,3 +125,8 @@
 - **附魔值**：20
 - **修复材料**：下界钛合金锭
 - **防火**：所有下界钛合金装备均具有防火属性，掉入岩浆不会被烧毁
+
+![下界钛合金装备](../screenshots/titanium/nether_titanium_alloy_1.png)
+
+![下界钛合金装备](../screenshots/titanium/nether_titanium_alloy_2.png)
+
