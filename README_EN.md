@@ -33,11 +33,22 @@ A gorgeous decorative material similar to quartz, with a milky white appearance 
 
 ---
 
+### ⚙️ [Titanium Series](docs/titanium_en.md)
+
+A rare deep-level mineral that generates underground (Y = -50 ~ -15). Mine Titanium Ore to obtain Raw Titanium, smelt it into Titanium, then craft Titanium Alloy Ingots and Nether Titanium Alloy Ingots at a Smithing Table to create two sets of powerful armor.
+
+> Includes: Titanium Ore, Deepslate Titanium Ore, Raw Titanium, Titanium, Alloy Smithing Template, Titanium Alloy Ingot, Titanium Alloy Block, Nether Titanium Alloy Ingot, Nether Titanium Alloy Block, Titanium Alloy Helmet/Chestplate/Leggings/Boots, Nether Titanium Alloy Helmet/Chestplate/Leggings/Boots
+>
+> 👉 [View Details](docs/titanium_en.md)
+
+---
+
 ## 🎨 Creative Mode
 
 All items can be found in the following Creative Mode tabs:
-- **Building Blocks**: Opal Ore, Opal Block, Smooth Opal Block, Opal Bricks, Opal Stairs, Opal Slab, Opal Pressure Plate, Opal Wall, Ruby Ore, Deepslate Ruby Ore
-- **Materials**: Ruby, Ruby Heart, Opal
+- **Building Blocks**: Opal Ore, Opal Block, Smooth Opal Block, Opal Bricks, Opal Stairs, Opal Slab, Opal Pressure Plate, Opal Wall, Ruby Ore, Deepslate Ruby Ore, Titanium Ore, Deepslate Titanium Ore, Titanium Alloy Block, Nether Titanium Alloy Block
+- **Materials**: Ruby, Ruby Heart, Opal, Raw Titanium, Titanium, Alloy Smithing Template, Titanium Alloy Ingot, Nether Titanium Alloy Ingot
+- **Combat**: Titanium Alloy Helmet/Chestplate/Leggings/Boots, Nether Titanium Alloy Helmet/Chestplate/Leggings/Boots
 - **Professional Miner Tab**: Contains all items
 
 ---

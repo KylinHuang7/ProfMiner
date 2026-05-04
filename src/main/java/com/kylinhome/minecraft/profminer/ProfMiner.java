@@ -204,15 +204,25 @@ public class ProfMiner {
         1.0f  // 击退抗性
       ));
 
-    // 钛矿方块（深层，需钻石镐挖掘，不掉经验）
+    // 钛矿方块（石头变种，需钻石镐挖掘，不掉经验）
     public static final DeferredBlock<Block> TITANIUM_ORE = BLOCKS.register("titanium_ore",
+      () -> new Block(
+        BlockBehaviour.Properties.of()
+          .mapColor(MapColor.STONE)
+          .strength(3.0f, 3.0f)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.STONE)));
+    public static final DeferredItem<BlockItem> TITANIUM_ORE_ITEM = ITEMS.registerSimpleBlockItem("titanium_ore", TITANIUM_ORE);
+
+    // 深层钛矿方块（深板岩变种，需钻石镐挖掘，不掉经验）
+    public static final DeferredBlock<Block> DEEPSLATE_TITANIUM_ORE = BLOCKS.register("deepslate_titanium_ore",
       () -> new Block(
         BlockBehaviour.Properties.of()
           .mapColor(MapColor.DEEPSLATE)
           .strength(4.5f, 3.0f)
           .requiresCorrectToolForDrops()
           .sound(SoundType.DEEPSLATE)));
-    public static final DeferredItem<BlockItem> TITANIUM_ORE_ITEM = ITEMS.registerSimpleBlockItem("titanium_ore", TITANIUM_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_TITANIUM_ORE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_titanium_ore", DEEPSLATE_TITANIUM_ORE);
 
     // 钛矿石（原矿物品，可熔炼获得钛）
     public static final DeferredItem<Item> RAW_TITANIUM = ITEMS.registerSimpleItem("raw_titanium", new Item.Properties());
@@ -295,6 +305,7 @@ public class ProfMiner {
             output.accept(OPAL_WALL_ITEM.get());
             // 钛矿系列
             output.accept(TITANIUM_ORE_ITEM.get());
+            output.accept(DEEPSLATE_TITANIUM_ORE_ITEM.get());
             output.accept(RAW_TITANIUM.get());
             output.accept(TITANIUM.get());
             output.accept(ALLOY_SMITHING_TEMPLATE.get());
@@ -368,6 +379,7 @@ public class ProfMiner {
             event.accept(OPAL_PRESSURE_PLATE_ITEM);
             event.accept(OPAL_WALL_ITEM);
             event.accept(TITANIUM_ORE_ITEM);
+            event.accept(DEEPSLATE_TITANIUM_ORE_ITEM);
             event.accept(TITANIUM_ALLOY_BLOCK_ITEM);
             event.accept(NETHER_TITANIUM_ALLOY_BLOCK_ITEM);
         }
@@ -401,7 +413,7 @@ public class ProfMiner {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
 
         @SubscribeEvent
