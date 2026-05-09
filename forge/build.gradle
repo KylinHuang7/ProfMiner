@@ -2,6 +2,7 @@ plugins {
     id "architectury-plugin"
     id "dev.architectury.loom"
     id "com.github.johnrengelman.shadow"
+    id "net.darkhax.curseforgegradle"
 }
 
 architectury {
@@ -66,5 +67,25 @@ jar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+// ============================================================
+// CurseForge 发布配置
+// ============================================================
+if (System.getenv("CURSEFORGE_API_KEY") != null && System.getenv("CURSEFORGE_PROJECT_ID") != null) {
+    task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+        dependsOn remapJar
+        disableVersionDetection()
+
+        apiToken = System.getenv("CURSEFORGE_API_KEY")
+
+        def mainFile = upload(System.getenv("CURSEFORGE_PROJECT_ID"), remapJar.archiveFile)
+        mainFile.displayName = "ProfMiner ${rootProject.property('minecraft_version')} (Forge) v${project.version}"
+        mainFile.releaseType = "release"
+        mainFile.changelog = "v${project.version} 多版本支持更新。详见 GitHub CHANGELOG.md"
+        mainFile.changelogType = "text"
+        mainFile.addGameVersion(rootProject.property('minecraft_version'))
+        mainFile.addModLoader("Forge")
     }
 }
