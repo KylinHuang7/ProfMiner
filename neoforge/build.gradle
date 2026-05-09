@@ -73,7 +73,7 @@ components.java {
 // ============================================================
 // CurseForge 发布配置
 // ============================================================
-if (System.getenv("CURSEFORGE_API_KEY") && System.getenv("CURSEFORGE_PROJECT_ID")) {
+if (System.getenv("CURSEFORGE_API_KEY") != null && System.getenv("CURSEFORGE_PROJECT_ID") != null) {
     task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
         dependsOn remapJar
         disableVersionDetection()
