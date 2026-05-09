@@ -91,3 +91,21 @@ The project uses a multi-branch strategy to manage different MC versions, with a
 ```
 
 Build artifacts are output to the `build/release/` directory.
+
+### 🔐 Environment Variables
+
+Publishing to CurseForge requires the following environment variables. A `.env.example` template is provided in the project root:
+
+```bash
+# Copy the template and fill in your configuration
+cp .env.example .env
+```
+
+`.env` file contents:
+
+| Variable | Description | How to Obtain |
+|---|---|---|
+| `CURSEFORGE_API_KEY` | CurseForge API Token | [Console API Keys](https://console.curseforge.com/#/api-keys) |
+| `CURSEFORGE_PROJECT_ID` | CurseForge Project ID | [Console](https://console.curseforge.com/) project overview page |
+
+> ⚠️ The `.env` file is included in `.gitignore` and will not be committed to the repository. Never expose your API Key in a public repository.

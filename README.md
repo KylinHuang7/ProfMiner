@@ -91,3 +91,21 @@
 ```
 
 编译产物输出到 `build/release/` 目录。
+
+### 🔐 环境变量配置
+
+发布到 CurseForge 时需要配置以下环境变量。项目根目录提供了 `.env.example` 模板：
+
+```bash
+# 复制模板并填入你的配置
+cp .env.example .env
+```
+
+`.env` 文件内容：
+
+| 变量名 | 说明 | 获取方式 |
+|---|---|---|
+| `CURSEFORGE_API_KEY` | CurseForge API Token | [控制台 API Keys](https://console.curseforge.com/#/api-keys) |
+| `CURSEFORGE_PROJECT_ID` | CurseForge 项目 ID | [控制台](https://console.curseforge.com/) 项目概览页 |
+
+> ⚠️ `.env` 文件已加入 `.gitignore`，不会被提交到仓库。请勿将 API Key 泄露到公开仓库中。

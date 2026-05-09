@@ -17,6 +17,14 @@
 
 set -e
 
+# 自动加载 .env 文件（如果存在）
+ENV_FILE="$(cd "$(dirname "$0")" && pwd)/.env"
+if [ -f "$ENV_FILE" ]; then
+    set -a
+    source "$ENV_FILE"
+    set +a
+fi
+
 # 颜色输出
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -34,16 +42,34 @@ TARGET_BRANCH=""
 CURSEFORGE_PROJECT_ID="${CURSEFORGE_PROJECT_ID:-}"
 CURSEFORGE_API_KEY="${CURSEFORGE_API_KEY:-}"
 
-# 分支配置：分支名 -> (MC版本, 加载器, 游戏版本ID)
-# CurseForge 游戏版本 ID 可在 https://minecraft.curseforge.com/api/game/versions 查询
-declare -A BRANCH_CONFIG
-BRANCH_CONFIG["master"]="1.21.1|neoforge|NeoForge"
-BRANCH_CONFIG["1.20.1"]="1.20.1|forge|Forge"
+# ============================================================
+# 分支配置（兼容 bash 3.x，不使用关联数组）
+# 格式：分支名|MC版本|加载器|加载器显示名|CurseForge游戏版本(逗号分隔)
+# ============================================================
+BRANCHES=(
+    "master|1.21.1|neoforge|NeoForge|10236"
+    "1.20.1|1.20.1|forge|Forge|9990"
+)
 
-# CurseForge MC 版本映射
-declare -A CF_MC_VERSIONS
-CF_MC_VERSIONS["1.21.1"]="1.21.1"
-CF_MC_VERSIONS["1.20.1"]="1.20.1"
+# 根据分支名获取配置
+get_branch_config() {
+    local target_branch="$1"
+    for entry in "${BRANCHES[@]}"; do
+        local branch_name="${entry%%|*}"
+        if [ "$branch_name" = "$target_branch" ]; then
+            echo "$entry"
+            return 0
+        fi
+    done
+    return 1
+}
+
+# 获取所有分支名
+get_all_branch_names() {
+    for entry in "${BRANCHES[@]}"; do
+        echo "${entry%%|*}"
+    done
+}
 
 # ============================================================
 # 工具函数
@@ -86,7 +112,7 @@ usage() {
 
 # 解析命令行参数
 parse_args() {
-    while [[ $# -gt 0 ]]; do
+    while [ $# -gt 0 ]; do
         case $1 in
             --publish)
                 PUBLISH=true
@@ -98,9 +124,9 @@ parse_args() {
                 ;;
             --list)
                 echo "可用分支:"
-                for branch in "${!BRANCH_CONFIG[@]}"; do
-                    IFS='|' read -r mc_ver loader _ <<< "${BRANCH_CONFIG[$branch]}"
-                    echo "  ${branch} -> MC ${mc_ver} (${loader})"
+                for entry in "${BRANCHES[@]}"; do
+                    IFS='|' read -r branch_name mc_ver loader loader_name cf_ver <<< "$entry"
+                    echo "  ${branch_name} -> MC ${mc_ver} (${loader_name})"
                 done
                 exit 0
                 ;;
@@ -122,7 +148,7 @@ check_publish_env() {
     if [ "$PUBLISH" = true ]; then
         if [ -z "$CURSEFORGE_API_KEY" ]; then
             log_error "发布需要设置 CURSEFORGE_API_KEY 环境变量"
-            log_info "获取方式: https://www.curseforge.com/account/api-tokens"
+            log_info "获取方式: https://console.curseforge.com/#/api-keys"
             exit 1
         fi
         if [ -z "$CURSEFORGE_PROJECT_ID" ]; then
@@ -139,15 +165,14 @@ get_current_branch() {
 
 # 编译指定分支
 build_branch() {
-    local branch=$1
-    local config="${BRANCH_CONFIG[$branch]}"
-
-    if [ -z "$config" ]; then
+    local branch="$1"
+    local config
+    config=$(get_branch_config "$branch") || {
         log_error "未知分支: $branch"
         return 1
-    fi
+    }
 
-    IFS='|' read -r mc_ver loader loader_name <<< "$config"
+    IFS='|' read -r branch_name mc_ver loader loader_name cf_ver <<< "$config"
 
     log_info "=========================================="
     log_info "编译分支: ${branch}"
@@ -182,8 +207,13 @@ build_branch() {
     jar_file=$(find "$jar_dir" -name "*.jar" ! -name "*-dev*" ! -name "*-shadow*" ! -name "*-sources*" | head -1)
 
     if [ -n "$jar_file" ] && [ -f "$jar_file" ]; then
-        local dest_name="profminer-${mc_ver}-${loader}-$(basename "$jar_file" | grep -oP '\d+\.\d+\.\d+' | head -1).jar"
-        if [ -z "$dest_name" ] || [ "$dest_name" = "profminer-${mc_ver}-${loader}-.jar" ]; then
+        # 从文件名中提取版本号
+        local version_str
+        version_str=$(basename "$jar_file" | sed -n 's/.*-\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')
+        local dest_name
+        if [ -n "$version_str" ]; then
+            dest_name="profminer-${mc_ver}-${loader}-${version_str}.jar"
+        else
             dest_name="profminer-${mc_ver}-${loader}.jar"
         fi
         cp "$jar_file" "${output_subdir}/${dest_name}"
@@ -200,10 +230,14 @@ build_branch() {
 
 # 发布到 CurseForge
 publish_to_curseforge() {
-    local branch=$1
-    local config="${BRANCH_CONFIG[$branch]}"
+    local branch="$1"
+    local config
+    config=$(get_branch_config "$branch") || {
+        log_error "未知分支: $branch"
+        return 1
+    }
 
-    IFS='|' read -r mc_ver loader loader_name <<< "$config"
+    IFS='|' read -r branch_name mc_ver loader loader_name cf_ver <<< "$config"
 
     local output_subdir="${OUTPUT_DIR}/${mc_ver}-${loader}"
     local jar_file
@@ -218,31 +252,23 @@ publish_to_curseforge() {
     log_info "  MC 版本: ${mc_ver}"
     log_info "  加载器: ${loader_name}"
 
-    # 构建 CurseForge metadata
-    local cf_mc_version="${CF_MC_VERSIONS[$mc_ver]}"
     local release_type="release"
 
-    # 构建 relations（依赖）
-    local relations=""
-    if [ "$loader" = "neoforge" ]; then
-        relations='"relations": {"projects": [{"slug": "architectury-api", "type": "requiredDependency"}]}'
-    elif [ "$loader" = "forge" ]; then
-        relations='"relations": {"projects": [{"slug": "architectury-api", "type": "requiredDependency"}]}'
-    fi
+    # 构建 gameVersions 数组（支持多个版本 ID，逗号分隔）
+    local game_versions_json=""
+    IFS=',' read -ra ver_ids <<< "$cf_ver"
+    for vid in "${ver_ids[@]}"; do
+        if [ -n "$game_versions_json" ]; then
+            game_versions_json="${game_versions_json}, ${vid}"
+        else
+            game_versions_json="${vid}"
+        fi
+    done
 
     # 使用 CurseForge API 上传
-    local metadata
-    metadata=$(cat <<EOF
-{
-    "changelog": "多版本支持更新，详见 GitHub CHANGELOG.md",
-    "changelogType": "text",
-    "displayName": "ProfMiner ${mc_ver} (${loader_name})",
-    "gameVersions": ["${cf_mc_version}"],
-    "releaseType": "${release_type}",
-    ${relations}
-}
-EOF
-)
+    local metadata="{\"changelog\": \"v1.0.2 多版本支持更新：支持 Forge 1.20.1 和 NeoForge 1.21.1+。详见 GitHub CHANGELOG.md\", \"changelogType\": \"text\", \"displayName\": \"ProfMiner ${mc_ver} (${loader_name}) v1.0.2\", \"gameVersions\": [${game_versions_json}], \"releaseType\": \"${release_type}\"}"
+
+    log_info "  Metadata: ${metadata}"
 
     local response
     response=$(curl -s -w "\n%{http_code}" \
@@ -257,7 +283,7 @@ EOF
     body=$(echo "$response" | sed '$d')
 
     if [ "$http_code" = "200" ]; then
-        log_success "发布成功！文件 ID: $(echo "$body" | grep -oP '"id":\s*\K\d+')"
+        log_success "发布成功！响应: ${body}"
     else
         log_error "发布失败 (HTTP ${http_code}): ${body}"
         return 1
@@ -286,14 +312,16 @@ main() {
     # 确定要编译的分支列表
     local branches_to_build=()
     if [ -n "$TARGET_BRANCH" ]; then
-        if [ -z "${BRANCH_CONFIG[$TARGET_BRANCH]}" ]; then
+        if ! get_branch_config "$TARGET_BRANCH" > /dev/null 2>&1; then
             log_error "未知分支: $TARGET_BRANCH"
-            log_info "可用分支: ${!BRANCH_CONFIG[*]}"
+            log_info "可用分支: $(get_all_branch_names | tr '\n' ' ')"
             exit 1
         fi
         branches_to_build=("$TARGET_BRANCH")
     else
-        branches_to_build=("${!BRANCH_CONFIG[@]}")
+        while IFS= read -r name; do
+            branches_to_build+=("$name")
+        done < <(get_all_branch_names)
     fi
 
     # 编译
