@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "profminer:block/opal_block",
-    "top": "profminer:block/opal_block",
-    "side": "profminer:block/opal_block"
-  }
-}

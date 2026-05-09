@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "profminer:item/nether_titanium_alloy_boots"
-  }
-}
