@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GTG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "tag": "profminer:smithing_templates"
+    }
+  },
+  "result": {
+    "id": "profminer:alloy_smithing_template",
+    "count": 1
+  }
+}

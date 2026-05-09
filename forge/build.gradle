@@ -1,0 +1,80 @@
+plugins {
+    id "architectury-plugin"
+    id "dev.architectury.loom"
+    id "com.github.johnrengelman.shadow"
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    silentMojangMappingsLicense()
+
+    forge {
+        mixinConfig "${rootProject.property('mod_id')}.mixins.json"
+    }
+}
+
+configurations {
+    common
+    shadowCommon
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${rootProject.property('minecraft_version')}"
+    mappings loom.officialMojangMappings()
+    forge "net.minecraftforge:forge:${rootProject.property('minecraft_version')}-${rootProject.property('forge_version')}"
+
+    modImplementation "dev.architectury:architectury-forge:${rootProject.property('architectury_version')}"
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive false }
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version,
+               "mod_id": rootProject.property("mod_id"),
+               "mod_name": rootProject.property("mod_name"),
+               "mod_authors": rootProject.property("mod_authors"),
+               "mod_description": rootProject.property("mod_description"),
+               "mod_license": rootProject.property("mod_license"),
+               "minecraft_version_range": rootProject.property("minecraft_version_range"),
+               "forge_version_range": rootProject.property("forge_version_range"),
+               "forge_loader_version_range": rootProject.property("forge_loader_version_range")
+    }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier = "dev-shadow"
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier = null
+}
+
+jar {
+    archiveClassifier = "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
