@@ -228,7 +228,7 @@ build_branch() {
     fi
 }
 
-# 发布到 CurseForge
+# 发布到 CurseForge（通过 Gradle 插件）
 publish_to_curseforge() {
     local branch="$1"
     local config
@@ -239,54 +239,41 @@ publish_to_curseforge() {
 
     IFS='|' read -r branch_name mc_ver loader loader_name cf_ver <<< "$config"
 
-    local output_subdir="${OUTPUT_DIR}/${mc_ver}-${loader}"
-    local jar_file
-    jar_file=$(find "$output_subdir" -name "*.jar" | head -1)
+    log_info "发布到 CurseForge: ${mc_ver} (${loader_name})"
 
-    if [ -z "$jar_file" ] || [ ! -f "$jar_file" ]; then
-        log_error "未找到 ${branch} 的编译产物，跳过发布"
+    local current_branch
+    current_branch=$(get_current_branch)
+
+    # 如果不在目标分支，先切换
+    if [ "$current_branch" != "$branch" ]; then
+        log_info "切换到分支: ${branch}"
+        git -C "$PROJECT_DIR" checkout "$branch" --quiet
+    fi
+
+    cd "$PROJECT_DIR"
+
+    # 通过 Gradle CurseForge 插件发布
+    local publish_task=":${loader}:publishCurseForge"
+    log_info "执行 Gradle 任务: ${publish_task}"
+
+    CURSEFORGE_API_KEY="${CURSEFORGE_API_KEY}" \
+    CURSEFORGE_PROJECT_ID="${CURSEFORGE_PROJECT_ID}" \
+    ./gradlew ${publish_task} --no-daemon
+
+    if [ $? -eq 0 ]; then
+        log_success "发布成功！"
+    else
+        log_error "发布失败"
+        # 切回原分支
+        if [ "$current_branch" != "$branch" ]; then
+            git -C "$PROJECT_DIR" checkout "$current_branch" --quiet
+        fi
         return 1
     fi
 
-    log_info "发布到 CurseForge: $(basename "$jar_file")"
-    log_info "  MC 版本: ${mc_ver}"
-    log_info "  加载器: ${loader_name}"
-
-    local release_type="release"
-
-    # 构建 gameVersions 数组（支持多个版本 ID，逗号分隔）
-    local game_versions_json=""
-    IFS=',' read -ra ver_ids <<< "$cf_ver"
-    for vid in "${ver_ids[@]}"; do
-        if [ -n "$game_versions_json" ]; then
-            game_versions_json="${game_versions_json}, ${vid}"
-        else
-            game_versions_json="${vid}"
-        fi
-    done
-
-    # 使用 CurseForge API 上传
-    local metadata="{\"changelog\": \"v1.0.2 多版本支持更新：支持 Forge 1.20.1 和 NeoForge 1.21.1+。详见 GitHub CHANGELOG.md\", \"changelogType\": \"text\", \"displayName\": \"ProfMiner ${mc_ver} (${loader_name}) v1.0.2\", \"gameVersions\": [${game_versions_json}], \"releaseType\": \"${release_type}\"}"
-
-    log_info "  Metadata: ${metadata}"
-
-    local response
-    response=$(curl -s -w "\n%{http_code}" \
-        -X POST "https://minecraft.curseforge.com/api/projects/${CURSEFORGE_PROJECT_ID}/upload-file" \
-        -H "X-Api-Token: ${CURSEFORGE_API_KEY}" \
-        -F "metadata=${metadata}" \
-        -F "file=@${jar_file}")
-
-    local http_code
-    http_code=$(echo "$response" | tail -1)
-    local body
-    body=$(echo "$response" | sed '$d')
-
-    if [ "$http_code" = "200" ]; then
-        log_success "发布成功！响应: ${body}"
-    else
-        log_error "发布失败 (HTTP ${http_code}): ${body}"
-        return 1
+    # 切回原分支
+    if [ "$current_branch" != "$branch" ]; then
+        git -C "$PROJECT_DIR" checkout "$current_branch" --quiet
     fi
 }
 
