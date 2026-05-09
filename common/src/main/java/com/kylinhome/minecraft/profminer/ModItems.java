@@ -6,10 +6,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 /**
- * 模组物品注册 - 所有平台共享
+ * 模组物品注册 - 所有平台共享 (1.20.1)
  */
 public class ModItems {
 

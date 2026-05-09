@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 
 /**
- * 模组方块注册 - 所有平台共享
+ * 模组方块注册 - 所有平台共享 (1.20.1)
  */
 public class ModBlocks {
 
@@ -24,20 +24,20 @@ public class ModBlocks {
 
     // ========== 红宝石矿石 ==========
     public static final RegistrySupplier<Block> RUBY_ORE = BLOCKS.register("ruby_ore",
-        () -> new DropExperienceBlock(UniformInt.of(3, 7),
-            BlockBehaviour.Properties.of()
+        () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.STONE)
                 .strength(3.0f, 3.0f)
                 .requiresCorrectToolForDrops()
-                .sound(SoundType.STONE)));
+                .sound(SoundType.STONE),
+            UniformInt.of(3, 7)));
 
     public static final RegistrySupplier<Block> DEEPSLATE_RUBY_ORE = BLOCKS.register("deepslate_ruby_ore",
-        () -> new DropExperienceBlock(UniformInt.of(3, 7),
-            BlockBehaviour.Properties.of()
+        () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.DEEPSLATE)
                 .strength(4.5f, 3.0f)
                 .requiresCorrectToolForDrops()
-                .sound(SoundType.DEEPSLATE)));
+                .sound(SoundType.DEEPSLATE),
+            UniformInt.of(3, 7)));
 
     // ========== 蛋白石系列 ==========
     public static final RegistrySupplier<Block> OPAL_ORE = BLOCKS.register("opal_ore",
@@ -89,13 +89,14 @@ public class ModBlocks {
                 .sound(SoundType.STONE)));
 
     public static final RegistrySupplier<Block> OPAL_PRESSURE_PLATE = BLOCKS.register("opal_pressure_plate",
-        () -> new PressurePlateBlock(BlockSetType.STONE,
+        () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS,
             BlockBehaviour.Properties.of()
                 .mapColor(MapColor.QUARTZ)
                 .strength(0.5f)
                 .requiresCorrectToolForDrops()
                 .noCollission()
-                .sound(SoundType.STONE)));
+                .sound(SoundType.STONE),
+            BlockSetType.STONE));
 
     public static final RegistrySupplier<Block> OPAL_WALL = BLOCKS.register("opal_wall",
         () -> new WallBlock(

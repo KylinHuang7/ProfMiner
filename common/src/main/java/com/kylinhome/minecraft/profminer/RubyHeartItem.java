@@ -1,7 +1,6 @@
 package com.kylinhome.minecraft.profminer;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -14,8 +13,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.UUID;
+
 /**
  * 红宝石心 - 使用后增加2点生命值上限（1颗红心），最多增加到20颗红心（40点生命值）
+ * 1.20.1 版本适配
  */
 public class RubyHeartItem extends Item {
 
@@ -23,9 +25,10 @@ public class RubyHeartItem extends Item {
     private static final double HEALTH_INCREASE = 2.0;
     // 最大生命值上限（20颗红心 = 40点）
     private static final double MAX_HEALTH_LIMIT = 40.0;
-    // 属性修改器的基础ID
-    private static final ResourceLocation RUBY_HEART_MODIFIER_ID =
-        ResourceLocation.fromNamespaceAndPath(ProfMinerMod.MOD_ID, "ruby_heart_extra_health");
+    // 属性修改器的UUID（1.20.1使用UUID而非ResourceLocation）
+    private static final UUID RUBY_HEART_MODIFIER_UUID =
+        UUID.fromString("a3f7b2c1-4d5e-6f78-9a0b-1c2d3e4f5a6b");
+    private static final String RUBY_HEART_MODIFIER_NAME = "profminer:ruby_heart_extra_health";
 
     public RubyHeartItem(Properties properties) {
         super(properties);
@@ -50,12 +53,12 @@ public class RubyHeartItem extends Item {
                 }
 
                 // 获取当前已有的红宝石心修改器
-                AttributeModifier existingModifier = healthAttribute.getModifier(RUBY_HEART_MODIFIER_ID);
+                AttributeModifier existingModifier = healthAttribute.getModifier(RUBY_HEART_MODIFIER_UUID);
                 double currentBonus = 0;
                 if (existingModifier != null) {
-                    currentBonus = existingModifier.amount();
+                    currentBonus = existingModifier.getAmount();
                     // 移除旧的修改器，准备添加新的
-                    healthAttribute.removeModifier(RUBY_HEART_MODIFIER_ID);
+                    healthAttribute.removeModifier(RUBY_HEART_MODIFIER_UUID);
                 }
 
                 // 计算新的加成值
@@ -72,11 +75,12 @@ public class RubyHeartItem extends Item {
                     return InteractionResultHolder.fail(itemStack);
                 }
 
-                // 添加新的修改器
+                // 添加新的修改器（1.20.1使用UUID + name + amount + operation）
                 AttributeModifier newModifier = new AttributeModifier(
-                    RUBY_HEART_MODIFIER_ID,
+                    RUBY_HEART_MODIFIER_UUID,
+                    RUBY_HEART_MODIFIER_NAME,
                     newBonus,
-                    AttributeModifier.Operation.ADD_VALUE
+                    AttributeModifier.Operation.ADDITION
                 );
                 healthAttribute.addPermanentModifier(newModifier);
 

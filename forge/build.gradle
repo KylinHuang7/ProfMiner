@@ -11,10 +11,6 @@ architectury {
 
 loom {
     silentMojangMappingsLicense()
-
-    forge {
-        mixinConfig "${rootProject.property('mod_id')}.mixins.json"
-    }
 }
 
 configurations {
