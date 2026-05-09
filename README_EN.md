@@ -3,7 +3,13 @@
 [🌐 中文版](README.md)
 
 A mod focused on various minerals.
-Supports Minecraft 1.21.1
+
+### 🎮 Supported Versions
+
+| Minecraft Version | Mod Loader | Branch |
+|---|---|---|
+| 1.21.1 | NeoForge | `master` |
+| 1.20.1 | Forge | `1.20.1` |
 
 ---
 
@@ -61,6 +67,27 @@ All items can be found in the following Creative Mode tabs:
 |---|---|
 | Mod ID | `profminer` |
 | Mod Name | Professional Miner |
-| Minecraft Version | 1.21.1 |
-| Mod Loader | NeoForge 21.1.219 |
+| Architecture | Architectury (Multi-loader) |
+| Minecraft Version | 1.20.1 / 1.21.1 |
+| Mod Loader | Forge (1.20.1) / NeoForge (1.21.1) |
 | Author | KylinHuang & dragonhahaha |
+
+---
+
+## 🛠️ Building
+
+The project uses a multi-branch strategy to manage different MC versions, with a one-click build script:
+
+```bash
+# Build all versions
+./build_all.sh
+
+# Build specific branch only
+./build_all.sh --branch master
+./build_all.sh --branch 1.20.1
+
+# Build and publish to CurseForge
+./build_all.sh --publish
+```
+
+Build artifacts are output to the `build/release/` directory.

@@ -3,7 +3,13 @@
 [🌐 English Version](README_EN.md)
 
 一个专注于各种矿物的模组。
-支持MineCraft 1.21.1
+
+### 🎮 支持版本
+
+| Minecraft 版本 | 模组加载器 | 分支 |
+|---|---|---|
+| 1.21.1 | NeoForge | `master` |
+| 1.20.1 | Forge | `1.20.1` |
 
 ---
 
@@ -57,10 +63,31 @@
 
 ## 🔧 技术信息
 
-| 属性 | 值                         |
-|---|---------------------------|
-| 模组 ID | `profminer`               |
-| 模组名称 | Professional Miner        |
-| Minecraft 版本 | 1.21.1                    |
-| 模组加载器 | NeoForge 21.1.219         |
+| 属性 | 值 |
+|---|---|
+| 模组 ID | `profminer` |
+| 模组名称 | Professional Miner |
+| 架构 | Architectury（多加载器） |
+| Minecraft 版本 | 1.20.1 / 1.21.1 |
+| 模组加载器 | Forge（1.20.1）/ NeoForge（1.21.1） |
 | 作者 | KylinHuang & dragonhahaha |
+
+---
+
+## 🛠️ 构建
+
+项目使用多分支策略管理不同 MC 版本，提供一键构建脚本：
+
+```bash
+# 编译所有版本
+./build_all.sh
+
+# 仅编译指定分支
+./build_all.sh --branch master
+./build_all.sh --branch 1.20.1
+
+# 编译并发布到 CurseForge
+./build_all.sh --publish
+```
+
+编译产物输出到 `build/release/` 目录。
