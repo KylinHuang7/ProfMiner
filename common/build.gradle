@@ -4,7 +4,7 @@ plugins {
 }
 
 architectury {
-    common(rootProject.property("mod_id"))
+    common("forge")
 }
 
 loom {

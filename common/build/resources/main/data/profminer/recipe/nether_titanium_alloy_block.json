@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NNN",
+    "NNN"
+  ],
+  "key": {
+    "N": {
+      "item": "profminer:nether_titanium_alloy_ingot"
+    }
+  },
+  "result": {
+    "id": "profminer:nether_titanium_alloy_block",
+    "count": 1
+  }
+}
